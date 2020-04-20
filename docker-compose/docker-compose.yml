@@ -1,0 +1,45 @@
+# Use root/example as user/password credentials
+version: '3.7'
+
+services:
+    mariadb:
+        image: mariadb:latest
+        ports:
+            - 3306:3306
+        volumes:
+            - ./mariadb/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+            - ./mariadb/data:/var/lib/mysql
+            - ./mysql_dump:/docker-entrypoint-initdb.d
+        environment:
+                MYSQL_ROOT_PASSWORD: root
+                # MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+                MYSQL_DATABASE: organization
+                # MYSQL_USER: admin
+                # MYSQL_PASSWORD: 12345
+        network_mode: "host"
+
+    mongo:
+        image: mongo:latest
+        ports:
+            - "27017:27017"
+        volumes:
+            - ./mongo/data:/data/db
+        network_mode: "host"
+
+    leave:
+        image: ppojin/leave
+        network_mode: "host"
+    meeting:
+        image: ppojin/meeting
+        network_mode: "host"
+    notification:
+        image: ppojin/notification
+        network_mode: "host"
+    organization:
+        image: ppojin/organization
+        network_mode: "host"
+    ui:
+        image: ppojin/ui
+        ports:
+            - "8080:8080"
+        network_mode: "host"

@@ -1,0 +1,10 @@
+# Use root/example as user/password credentials
+version: '3.7'
+
+services:
+    dind:
+        image: docker
+        ports:
+            - 8080:8080
+        volumes: 
+            - "./docker-compose:/docker-compose"
