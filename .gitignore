@@ -5,3 +5,4 @@ office_app/notification/
 office_app/organization/
 office_app/ui/
 istio/istio-1.0.6/
+.DS_Store/
